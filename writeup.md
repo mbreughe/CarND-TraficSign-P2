@@ -52,9 +52,13 @@ I used the matplotlib and numpy to explore the dataset:
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. It is a bar chart showing how many images we have of each kind as a percentage of the total images. This is done both for training and test data. We can see that we have a very similar distribution. However, some images are much better represented than others. 
 
-![barchart](https://github.com/mbreughe/CarND-TraficSign-P2/tree/master/writeup/barchart.png)
+![barchart of training and test](./writeup/barchart.png)
+
+Below we can see some example images:
+
+![Random examples](./writeup/examples.png)
 
 ### Design and Test a Model Architecture
 
