@@ -54,7 +54,7 @@ I used the matplotlib and numpy to explore the dataset:
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
 
-![barchart][writeup/barchart.png]
+![barchart](https://github.com/mbreughe/CarND-TraficSign-P2/tree/master/writeup/barchart.png)
 
 ### Design and Test a Model Architecture
 
