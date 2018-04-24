@@ -115,10 +115,13 @@ My final model results were:
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Below are the new images I downloaded, along with their predictions. Out of the 8 images, only 3 are actually have labels that we trained on (General Caution, Speed limit 60 and End no passing zone). The others are not present, though it is interesting to see what the network would predict.
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+Some thoughts: 
+* First, it is sad that "End no passing zone" was not guessed correctly. Though I have only one sample to reason on, I guess the reason for this is that these images are "clean" images. Just like it is known with clipart, a network trained on real-world data does not function well on clipart and vice versa, the same seems to be true for this classifier. Whereas for humans this does not seem to be a problem, it throws the network off. 
+* Second, I was hoping that the "End speed zone 60" (which is not present in the labels file) would be classified at least as "End speed zone 80". Unfortunately the network does not have this sort of intelligence. It does seem that it correctly saw "60" as it classified it as "Speed limit 60kph".
+
+![Random examples](./writeup/new_images.png)
 
 The first image might be difficult to classify because ...
 
