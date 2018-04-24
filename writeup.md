@@ -58,7 +58,7 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 Below we can see some example images:
 
-![Random examples](./writeup/examples.png)
+![Random examples](./writeup/sign_examples.png)
 
 ### Design and Test a Model Architecture
 
