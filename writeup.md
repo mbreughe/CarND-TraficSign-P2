@@ -36,48 +36,39 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/mbreughe/CarND-TraficSign-P2). A frozen version of the notebook can be found here: https://htmlpreview.github.io/?https://github.com/mbreughe/CarND-TraficSign-P2/blob/master/Traffic_Sign_Classifier.html
+Here is a link to my [project code](https://github.com/mbreughe/CarND-TraficSign-P2). A frozen version of the notebook can be found here: https://htmlpreview.github.io/?https://github.com/mbreughe/CarND-TraficSign-P2/blob/master/Traffic_Sign_Classifier.html
 
 ### Data Set Summary & Exploration
 
 #### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
+I used the matplotlib and numpy to explore the dataset:
 
-* The size of training set is ?
-* The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+* The size of training set is ? 34799
+* The size of the validation set is ? 4410
+* The size of test set is ? 12630
+* The shape of a traffic sign image is ? 32x32x3
+* The number of unique classes/labels in the data set is ? 43 
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Here is an exploratory visualization of the data set. It is a bar chart showing how many images we have of each kind as a percentage of the total images. This is done both for training and test data. We can see that we have a very similar distribution. However, some images are much better represented than others. 
 
-![alt text][image1]
+![barchart of training and test](./writeup/barchart.png)
+
+Below we can see some example images:
+
+![Random examples](./writeup/example_signs.png)
 
 ### Design and Test a Model Architecture
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because ...
+Contrary to the suggestion, I did not convert to grayscale. I believe the color channels contain valuable information. The European traffic sign system choose color next to using shapes to classify road signs. Since the goal of our neural network is to classify as well, my intuition is to use this extra information. Note: I did try grayscale in one of the initial attempts.
 
-Here is an example of a traffic sign image before and after grayscaling.
+The only preprocessing I did was to normalize the image data. Various sources prove that data with zero mean is easier to handle.
 
-![alt text][image2]
-
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
+I thought about augmenting existing images by rotating, adding noise, etc. I did not go this route as my prediction accuracy was already acceptable and augmenting it would distract me for several additional hours. If I were to do it, I would focus on signs we don't have a lot of examples for.
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
@@ -87,40 +78,38 @@ My final model consisted of the following layers:
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x6 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+| Convolution 5x5	    | 1x1 stride, valid padding, outputs 24x24x16	|
+| RELU					|												|
+| Pooling  2x2 |  2x2 stride, outputs 12x12x16 |
+| Flatten | Outputs 2304
+| Fully connected		| Outputs 400        									|
+| RELU  |  |
+| Dropout 0.5 |  |
+| Fully connected		| Outputs 120        									|
+| RELU  |  |
+| Fully connected		| Outputs 43        									|
+| Softmax |  |
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+To train the model, I used an Adam optimizer with start learning rate 0.001. I used a little over 10 EPOCH's (I saved the model after 10 and then run for another 2 or so). The batch size for stochastic descent was 128.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
+* I started off with plain grayscale LeNet as used in the lab. This gave a validation accuracy of 0.92.
+* Adding the color channels did not drastically change validation accuracy. (Train Accuracy = 0.995; Validation Accuracy = 0.915). Though, I believe we could be throwing away information through the first maxpooling layer: we start of with more data than in the grayscale case, but we are reducing to the same amount of information after the first maxpooling layer.
+* Next I removed this first maxpooling layer. This seems to result in slight overfitting (based on the increasing train accuracy and decreasing validation accuracy)
+* In an additional step to retain information, I increased the size of the first FC layer next (to 400 nodes instead of 120). This resulted in a train accuracy of 0.998 and validation of 0.922.
+* I added dropout to further reduce overfitting and was able to get Train Accuracy = 0.992; Validation Accuracy = 0.943.
+* I ran into the common issue of not removing dropout when inferencing. This caused several issues, including undeterministic behavior in predictions. By fixing this bug I got a validation accuracy of 0.959.
+
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
-
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+* training set accuracy of 0.999
+* validation set accuracy of 0.959
+* test set accuracy of 0.949
 
 ### Test a Model on New Images
 
