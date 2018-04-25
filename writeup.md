@@ -141,6 +141,7 @@ The model was able to correctly guess 2 of the 3 traffic signs, which gives an a
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 This is the output:
+```
 [[ 0.13028832  0.13007034  0.08402088  0.07909174  0.07208278]
  [ 0.11634503  0.11243185  0.11062806  0.08838627  0.06729894]
  [ 0.11209257  0.10610474  0.09881061  0.08135346  0.0792448 ]
@@ -172,6 +173,7 @@ This is the output:
   
  ['Speed limit (60km/h)' 'No passing' 'Speed limit (80km/h)'
   'General caution' 'Road work']]
+```
   
   
 For the three relevant images this means:
