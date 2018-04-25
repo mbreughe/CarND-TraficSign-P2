@@ -73,7 +73,7 @@ I thought about augmenting existing images by rotating, adding noise, etc. I did
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-My final model consisted of the following layers:
+My final model consisted of the layers below. The network itself can also be found here: https://github.com/mbreughe/CarND-TraficSign-P2/blob/master/lenet.py
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
