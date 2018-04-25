@@ -42,7 +42,7 @@ Here is a link to my [project code](https://github.com/mbreughe/CarND-TraficSign
 
 #### 1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-I used the matplotlib and numpy to explore the dataset:
+I used matplotlib and numpy to explore the dataset:
 
 * The size of training set is ? 34799
 * The size of the validation set is ? 4410
@@ -64,11 +64,11 @@ Below we can see some example images:
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-Contrary to the suggestion, I did not convert to grayscale. I believe the color channels contain valuable information. The European traffic sign system choose color next to using shapes to classify road signs. Since the goal of our neural network is to classify as well, my intuition is to use this extra information. Note: I did try grayscale in one of the initial attempts.
+Contrary to the suggestion, I did not convert to grayscale. I believe the color channels contain valuable information. The European traffic sign system chose color next to using shapes to classify road signs. Since the goal of our neural network is to classify as well, my intuition is to use this extra information. Note: I did try grayscale in one of the initial attempts.
 
 The only preprocessing I did was to normalize the image data. Various sources prove that data with zero mean is easier to handle.
 
-I thought about augmenting existing images by rotating, adding noise, etc. I did not go this route as my prediction accuracy was already acceptable and augmenting it would distract me for several additional hours. If I were to do it, I would focus on signs we don't have a lot of examples for.
+I thought about augmenting existing images by rotating, adding noise, etc. I did not go this route as my prediction accuracy was already acceptable and augmenting it would distract me for several additional hours. If I were to do it, I would focus on signs we have very few examples for, as well as speed limit signs: there are several speed limit signs that get classified for the wrong speed amount, which could imply that we are not capturing the subtle differneces of the digits.
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
@@ -115,10 +115,10 @@ My final model results were:
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Below are the new images I downloaded, along with their predictions. Out of the 8 images, only 3 are actually have labels that we trained on (General Caution, Speed limit 60 and End no passing zone). The others are not present, though it is interesting to see what the network would predict.
+Below are the new images I downloaded, along with their predictions. Out of the 8 images, only 3 actually have labels that we trained on (General Caution, Speed limit 60 and End no passing zone). The others are not present, though it is interesting to see what the network would predict.
 
 Some thoughts: 
-* First, it is sad that "End no passing zone" was not guessed correctly. Though I have only one sample to reason on, I guess the reason for this is that these images are "clean" images. Just like it is known with clipart, a network trained on real-world data does not function well on clipart and vice versa, the same seems to be true for this classifier. Whereas for humans this does not seem to be a problem, it throws the network off. 
+* First, it is sad that "End no passing zone" was not guessed correctly. Though I have only one sample to reason on, I guess the reason for this is that these images are "clean" images. Just like it is known with clipart, a network trained on real-world data does not function well on clipart and vice versa, the same seems to be true for this classifier. Whereas for humans this does not seem to be a problem, it throws the network off. Another reason could be that the downsizing of the image resulted in unclear edges around the sign.
 * Second, I was hoping that the "End speed zone 60" (which is not present in the labels file) would be classified at least as "End speed zone 80". Unfortunately the network does not have this sort of intelligence. It does seem that it correctly saw "60" as it classified it as "Speed limit 60kph".
 
 ![Random examples](./writeup/new_images.png)
@@ -217,7 +217,7 @@ Similarly the image below shows the 4 most *insecure incorrect* predictions. Aga
 
 ![insecure incorrect](writeup/error_insecure.png).
 
-The notebook further contains two related cases: confident incorrect and confident correct images. Based on all these insights, one could decide to augment more images of a certain type. (Intuitively I would augment more speed signs. Although they represent the vast majority of all signs, the network is not specialized in digit recognition. It is probably trying to look for features that all 60kmh signs have in common and features that all 80kmh signs have in common.)
+The notebook further contains two related cases: confident incorrect and confident correct images. Based on all these insights, one could decide to augment more images of a certain type. (Intuitively I would augment more speed signs. Although they represent the vast majority of all signs in the train set, the network is not specialized in digit recognition.)
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
@@ -227,11 +227,11 @@ For this to work I had to paste all network code into the notebook in order to g
 I looked at the first and second conv layers. The first conv layer shows the image in a couple of filtered ways: there is an embossed version, a sharpened version and some maps (e.g., feature map 4) seem to focus on contrast differences: when color changes from gray to red to white, the map changes from white to black to white. Unfortunately the feature maps on the second conv layer don't make much sense anymore to me.
 
 Original image:
-![original image](feature_map_orig.png)
+![original image](writeup/feature_map_orig.png)
 
 First conv layer:
-![conv layer 1](feature_map_c1.png)
+![conv layer 1](writeup/feature_map_c1.png)
 
 Second conv layer:
-![conv layer 2](feature_map_c2.png)
+![conv layer 2](writeup/feature_map_c2.png)
 
