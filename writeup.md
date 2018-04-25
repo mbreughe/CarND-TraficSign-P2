@@ -210,10 +210,10 @@ It seems like for the first two correct predictions, the network is not very sur
 To gain a better understanding of uncertain predictions, I've querried the network on it's most insecure predictions over the validation set.
 
 This image shows the 4 most *insecure correct* predictions. It can be seen that the images are dark and kind of hard for humans to classify without staring for a longer time.
-![insecure correct](writeup/insecure_correct.png).
+![insecure correct](writeup/correct_insecure.png).
 
 Similarly the image below shows the 4 most *insecure incorrect* predictions. Again, some of these are dark, but others are even blurry.
-![insecure incorrect](writeup/insecure_error.png).
+![insecure incorrect](writeup/error_insecure.png).
 
 The notebook further contains two related cases: confident incorrect and confident correct images. Based on all these insights, one could decide to augment more images of a certain type. (Intuitively I would augment more speed signs. Although they represent the vast majority of all signs, the network is not specialized in digit recognition. It is probably trying to look for features that all 60kmh signs have in common and features that all 80kmh signs have in common.)
 
