@@ -177,6 +177,7 @@ This is the output:
   
   
 For the three relevant images this means:
+
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | 0.112        			| **General caution**  									| 
