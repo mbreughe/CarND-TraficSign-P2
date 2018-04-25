@@ -210,9 +210,11 @@ It seems like for the first two correct predictions, the network is not very sur
 To gain a better understanding of uncertain predictions, I've querried the network on it's most insecure predictions over the validation set.
 
 This image shows the 4 most *insecure correct* predictions. It can be seen that the images are dark and kind of hard for humans to classify without staring for a longer time.
+
 ![insecure correct](writeup/correct_insecure.png).
 
 Similarly the image below shows the 4 most *insecure incorrect* predictions. Again, some of these are dark, but others are even blurry.
+
 ![insecure incorrect](writeup/error_insecure.png).
 
 The notebook further contains two related cases: confident incorrect and confident correct images. Based on all these insights, one could decide to augment more images of a certain type. (Intuitively I would augment more speed signs. Although they represent the vast majority of all signs, the network is not specialized in digit recognition. It is probably trying to look for features that all 60kmh signs have in common and features that all 80kmh signs have in common.)
@@ -220,4 +222,16 @@ The notebook further contains two related cases: confident incorrect and confide
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+For this to work I had to paste all network code into the notebook in order to gain access to the intermediate layers. 
+
+I looked at the first and second conv layers. The first conv layer shows the image in a couple of filtered ways: there is an embossed version, a sharpened version and some maps (e.g., feature map 4) seem to focus on contrast differences: when color changes from gray to red to white, the map changes from white to black to white. Unfortunately the feature maps on the second conv layer don't make much sense anymore to me.
+
+Original image:
+![original image](feature_map_orig.png)
+
+First conv layer:
+![conv layer 1](feature_map_c1.png)
+
+Second conv layer:
+![conv layer 2](feature_map_c2.png)
 
