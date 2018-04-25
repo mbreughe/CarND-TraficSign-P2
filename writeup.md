@@ -205,7 +205,17 @@ For the three relevant images this means:
 | .053				    | Road work      							|
 
 
-It seems like for the first two correct predictions, the network is not very sure which one to pick. The third prediction, which is incorrect, doesn't have the correct sign in its top 5.
+It seems like for the first two correct predictions, the network is not very sure which one to pick. The third prediction, which is incorrect, doesn't have the correct sign in its top 5. It is unclear to me why the network is not confident in these predictions. It could again have to do with the fact that these are clean images and not photos on which the network was trained. 
+
+To gain a better understanding of uncertain predictions, I've querried the network on it's most insecure predictions over the validation set.
+
+This image shows the 4 most *insecure correct* predictions. It can be seen that the images are dark and kind of hard for humans to classify without staring for a longer time.
+![insecure correct](writeup/insecure_correct.png).
+
+Similarly the image below shows the 4 most *insecure incorrect* predictions. Again, some of these are dark, but others are even blurry.
+![insecure incorrect](writeup/insecure_error.png).
+
+The notebook further contains two related cases: confident incorrect and confident correct images. Based on all these insights, one could decide to augment more images of a certain type. (Intuitively I would augment more speed signs. Although they represent the vast majority of all signs, the network is not specialized in digit recognition. It is probably trying to look for features that all 60kmh signs have in common and features that all 80kmh signs have in common.)
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
