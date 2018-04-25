@@ -177,7 +177,7 @@ This is the output:
 For the three relevant images this means:
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 0.112        			| *General caution*  									| 
+| 0.112        			| **General caution**  									| 
 | .106     				| Speed limit (60km/h) 										|
 | .099					| Speed limit (80km/h)										|
 | .081	      			| Road work				 				|
@@ -186,7 +186,7 @@ For the three relevant images this means:
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 0.123       			| *Speed limit (60km/h)*  									| 
+| 0.123       			| **Speed limit (60km/h)**  									| 
 | .109     				| Speed limit (80km/h) 										|
 | .101					| No passing										|
 | .097	      			| Road work				 				|
